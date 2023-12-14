@@ -1,2 +1,2 @@
 # git-homework
-Я починаю курс PHP в robot_dreams і вже вмію використовувати Git
+Я починаю курс PHP в robot_dreams і вже вмію використовувати Git!
