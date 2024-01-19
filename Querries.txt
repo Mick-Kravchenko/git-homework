@@ -1,0 +1,59 @@
+-- auto-generated definition
+create table Faculties
+(
+    FacultyID   integer
+        constraint Faculties_pk
+            primary key,
+    FacultyName TEXT
+);
+
+-- auto-generated definition
+create table Grades
+(
+    GradeID   integer
+        constraint Grades_pk
+            primary key,
+    StudentID integer
+        constraint fk_student
+            references Students,
+    SubjectID integer
+        constraint fk_subject
+            references Subjects,
+    Grade     integer
+);
+
+-- auto-generated definition
+create table Students
+(
+    Student_ID integer
+        constraint Students_pk
+            primary key,
+    Name       TEXT,
+    Faculty_ID integer
+        constraint fk_faculty
+            references Faculties
+);
+
+-- auto-generated definition
+create table Subjects
+(
+    SubjectID   integer
+        constraint Subjects_pk
+            primary key,
+    SubjectName TEXT
+);
+
+INSERT INTO Faculties (FacultyName) VALUES ('Engineering'), ('Business'), ('Science');
+INSERT INTO Subjects (SubjectName) VALUES ('Mathematics'), ('Physics'), ('Computer Science');
+INSERT INTO Students (Name, Faculty_ID) VALUES
+                                                          ('John', 1),
+                                                          ('Jane', 2),
+                                                          ('Bob', 3);
+INSERT INTO Grades (StudentID, SubjectID, Grade) VALUES
+                                                     (1, 1, 85),
+                                                     (1, 2, 92),
+                                                     (2, 1, 78),
+                                                     (2, 3, 88),
+                                                     (3, 2, 95),
+                                                     (3, 3, 90);
+
