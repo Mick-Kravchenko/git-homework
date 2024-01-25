@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+require_once('db.php');
+
+$connection=getConnection();
+$users = getUsers($connection);
+
+
+mysqli_close($connection);
+?>
 <head>
     <meta charset="UTF-8">
     <title>Реєстрація</title>
@@ -34,14 +44,54 @@
         </div>
 
     <?php elseif(!empty($_POST['email'])) :
-        $data = fopen("data.txt", "a+") or die("Couldn't read the file");
-        fwrite($data, $_POST['email'] . '{}' . $_POST['password'] . PHP_EOL);
-        fclose($data);
+    //$_SESSION['entered']=true;
+    //$_SESSION['user_admin']=true;
         ?>
 
-        <div class="alert alert-success" role="alert">
-            Ви вказали email <?= $_POST['email']; ?>
-        </div>
+        <?php if (($_POST['email']==$users[0]['login'])&&($_POST['password']==$users[0]['password'])){
+        $_SESSION['entered']=true;
+        $_SESSION['user_admin']=true;
+    $_SESSION['user_name']=$users[0]['login'];
+    ?>
+
+        <script>
+            // JavaScript для перенаправлення на ./chat.php
+            window.location.href = './chat.php';
+        </script>
+
+        <?php
+        exit();}
+            ?>
+
+        <?php if (($_POST['email']==$users[1]['login'])&&($_POST['password']==$users[1]['password'])){
+        $_SESSION['entered']=true;
+        $_SESSION['user_admin']=false;
+        $_SESSION['user_name']=$users[1]['login'];
+        ?>
+
+        <script>
+            // JavaScript для перенаправлення на ./chat.php
+            window.location.href = './chat.php';
+        </script>
+
+    <?php
+        exit();}
+        ?>
+    <?php if (($_POST['email']==$users[2]['login'])&&($_POST['password']==$users[2]['password'])){
+    $_SESSION['entered']=true;
+    $_SESSION['user_admin']=false;
+    $_SESSION['user_name']=$users[2]['login'];
+    ?>
+
+        <script>
+            // JavaScript для перенаправлення на ./chat.php
+            window.location.href = './chat.php';
+        </script>
+
+    <?php
+        exit();}
+        ?>
+
 
     <?php endif; ?>
 
