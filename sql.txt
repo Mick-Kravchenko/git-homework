@@ -1,0 +1,23 @@
+-- auto-generated definition
+create table messages
+(
+    id      int auto_increment
+        primary key,
+    name    text                               not null,
+    message text                               not null,
+    date    datetime default CURRENT_TIMESTAMP null
+);
+
+create table users
+(
+    id       int auto_increment,
+    login    text not null,
+    password text not null,
+    constraint users_pk
+        primary key (id)
+);
+
+
+INSERT INTO mydb.users (login, password) VALUES ('admin@gmail.com', 'admin')
+INSERT INTO mydb.users (login, password) VALUES ('user1@gmail.com', 'user1')
+INSERT INTO mydb.users (login, password) VALUES ('user2@gmail.com', 'user2')
