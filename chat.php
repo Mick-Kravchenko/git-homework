@@ -4,21 +4,21 @@
 session_start();
 require_once('db.php');
 
-$connection=getConnection();
+$pdo = getPDO();
 
 // Add new
 if (!empty($_POST['message'])) {
-    addNewMessage($connection, htmlspecialchars($_SESSION['user_name']), htmlspecialchars($_POST['message']));
+    addNewMessage($pdo, htmlspecialchars($_SESSION['user_name']), htmlspecialchars($_POST['message']));
 }
 
 
 if (!empty($_GET['delete_message'])) {
-    deleteMessage($connection, $_GET['delete_message']);
+    deleteMessage($pdo, $_GET['delete_message']);
 }
 
-$messages=getAllMessages($connection);
+$messages=getAllMessages($pdo);
 
-mysqli_close($connection);
+$pdo = null;
 
 if (isset($_GET['entered'])&&(!$_GET['entered'])) {
     $_SESSION['entered']=false;

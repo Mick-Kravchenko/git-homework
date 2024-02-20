@@ -4,11 +4,11 @@
 session_start();
 require_once('db.php');
 
-$connection=getConnection();
-$users = getUsers($connection);
+$pdo = getPDO();
+$users = getUsers($pdo);
 
 
-mysqli_close($connection);
+$pdo = null;
 ?>
 <head>
     <meta charset="UTF-8">
