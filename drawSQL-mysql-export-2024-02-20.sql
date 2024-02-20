@@ -1,0 +1,29 @@
+CREATE TABLE `Food`(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `Type` TEXT NOT NULL
+);
+CREATE TABLE `Employees`(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `Name` TEXT NOT NULL,
+    `Age` BIGINT NOT NULL,
+    `Salary` BIGINT NOT NULL,
+    `Cage_id` BIGINT NOT NULL
+);
+CREATE TABLE `Animals`(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `Name` CHAR(255) NOT NULL,
+    `Weight` BIGINT NOT NULL,
+    `Age` BIGINT NOT NULL,
+    `Cage_ID` BIGINT NOT NULL,
+    `Food_ID` BIGINT NOT NULL
+);
+CREATE TABLE `Aviary`(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `Number` BIGINT NOT NULL
+);
+ALTER TABLE
+    `Employees` ADD CONSTRAINT `employees_cage_id_foreign` FOREIGN KEY(`Cage_id`) REFERENCES `Aviary`(`id`);
+ALTER TABLE
+    `Animals` ADD CONSTRAINT `animals_food_id_foreign` FOREIGN KEY(`Food_ID`) REFERENCES `Food`(`id`);
+ALTER TABLE
+    `Animals` ADD CONSTRAINT `animals_cage_id_foreign` FOREIGN KEY(`Cage_ID`) REFERENCES `Aviary`(`id`);
