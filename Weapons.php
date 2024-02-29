@@ -1,6 +1,6 @@
 <?php
 
-class Weapon
+ class Weapon
 {
     protected const RANGE =0;
     protected const DAMAGE =0;

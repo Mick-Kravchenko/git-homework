@@ -1,14 +1,24 @@
 <?php
 require_once 'Weapons.php';
-class Hero
+
+interface WeaponInterface
+{
+    public function setWeapon(Weapon $weapon);
+}
+
+abstract class Hero
 {
     protected int $hp=0;
     protected int $stamina=0;
     protected Weapon $weapon;
     public string $name;
-    public function __construct(Weapon $weapon, string $name)
+
+    public function setWeapon(Weapon $weapon)
     {
         $this->weapon=$weapon;
+    }
+    public function __construct(string $name)
+    {
         $this->name=$name;
     }
 
@@ -37,18 +47,37 @@ class Hero
     {
         return $this->hp;
     }
+
+    abstract public function sayOnWin() :string;
+    abstract public function sayOnLose() :string;
 }
 
 class Magician extends Hero
 {
     protected int $hp=50;
     protected int $stamina=5;
+    public function sayOnWin() :string
+    {
+        return 'You shall not pass!';
+    }
+    public function sayOnLose() :string
+    {
+        return 'My spell was not strong enough...';
+    }
 }
 
 class Warrior extends Hero
 {
     protected int $hp=175;
     protected int $stamina=500;
+    public function sayOnWin() :string
+    {
+        return 'I have a piece of steel for you!';
+    }
+    public function sayOnLose() :string
+    {
+        return 'I recognize your strength...';
+    }
 }
 
 
@@ -56,6 +85,15 @@ class Bowman extends Hero
 {
     protected int $hp=150;
     protected int $stamina=500;
+
+    public function sayOnWin() :string
+    {
+        return 'Hahahaha!';
+    }
+    public function sayOnLose() :string
+    {
+        return 'I need more arrows!';
+    }
 }
 
 /*$bow=new Bow;

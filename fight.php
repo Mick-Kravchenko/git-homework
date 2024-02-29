@@ -73,8 +73,12 @@ public function __construct(Hero $hero1, Hero $hero2)
 
         if ($this->hero1->is_dead()) {
             echo $this->hero1->name . ' lost' . PHP_EOL;
+            echo $this->hero1->name . ': ' . $this->hero1->sayOnLose() . PHP_EOL;
+            echo $this->hero2->name . ': ' . $this->hero2->sayOnWin() . PHP_EOL;
         } elseif ($this->hero2->is_dead()) {
             echo $this->hero2->name . ' lost' . PHP_EOL;
+            echo $this->hero2->name . ': ' . $this->hero2->sayOnLose() . PHP_EOL;
+            echo $this->hero1->name . ': ' . $this->hero1->sayOnWin() . PHP_EOL;
         }
     }
 }
@@ -86,15 +90,18 @@ $sword=new Sword;
 $magicstuff=new MagicStuff;
 $pistol=new Pistol;
 
-$Legolas=new Bowman($bow, "Legolas");
-$Gimli = new Warrior($sword, 'Gimli');
-$Gandalf=new Magician($magicstuff, 'Gandalf');
+$Legolas=new Bowman("Legolas");
+$Legolas->setWeapon($bow);
+$Gimli = new Warrior('Gimli');
+$Gimli->setWeapon($sword);
+$Gandalf=new Magician('Gandalf');
+$Gandalf->setWeapon($magicstuff);
 
 $fight1=new Fight($Legolas,$Gimli);
 $fight2=new Fight($Legolas,$Gandalf);
 $fight3=new Fight($Gandalf,$Gimli);
 
-//$fight1->fight(5);
+$fight1->fight(5);
 //$fight2->fight(1);
 //$fight3->fight(30);
 
